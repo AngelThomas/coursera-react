@@ -56,29 +56,29 @@ class DishDetail extends Component {
     
     render() {
         
-        if (this.props.selectedDetailDish != null) {
-            const comments = this.props.selectedDetailDish.comments.map((dishComment) => {
+        if (this.props.dish != null) {
+/*             const comments = this.props.selectedDetailDish.comments.map((dishComment) => {
                 return (
                     <div id={dishComment.id} className="cardText">
                         <div className="li">{dishComment.comment}</div>
                         <p>-- {dishComment.author}, {dishComment.date}</p>
                     </div>
                 )
-            });
+            }); */
             return (
                 <div className="row">
                     <div  className="col-12 col-md-5 m-1">
-                        { this.renderDish(this.props.selectedDetailDish) }                      
+                        { this.renderDish(this.props.dish) }                      
                     </div>
                     <div  className="col-12 col-md-5 m-1">
-                        { this.renderComments(this.props.selectedDetailDish.comments) } 
+                        { this.renderComments(this.props.dish.comments) } 
                     </div>
                 </div>
             );
         } else {
             return (
                 <div>
-
+                    No Dish detail was set
                 </div>
             )
         }
