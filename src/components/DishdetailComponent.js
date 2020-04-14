@@ -63,7 +63,6 @@ function DishDetail(props) {
     } else {
         return (
             <div>
-                No Dish detail was set
             </div>
         )
     }
