@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, CardImg, CardBody, CardText, CardTitle } from 'reactstrap';
+import { Card, CardImg, CardBody, CardText, CardTitle, BreadcrumbItem, Breadcrumb } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const formatter = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
@@ -48,21 +49,33 @@ function RenderComments({dishComments}) {
 
 function DishDetail(props) {
 
-    console.log('DishDetailComponent was rendered')
+    console.log('DishDetailComponent was rendered, props: ' + props);
     if (props.dish != null) {
         return (
-            <div className="row">
-                <div  className="col-12 col-md-5 m-1">
-                    <RenderDish detailDish={props.dish}/>                   
+            <div className="Container">
+                <div className="row">
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{props.dish.name}</h3>
+                    </div>
                 </div>
-                <div  className="col-12 col-md-5 m-1">
-                    <RenderComments dishComments={props.dish.comments}/>
+                <div className="row">
+                    <div  className="col-12 col-md-5 m-1">
+                        <RenderDish detailDish={props.dish}/>                   
+                    </div>
+                    <div  className="col-12 col-md-5 m-1">
+                        <RenderComments dishComments={props.comments}/>
+                    </div>
                 </div>
             </div>
         );
     } else {
         return (
             <div>
+                no data in props
             </div>
         )
     }
