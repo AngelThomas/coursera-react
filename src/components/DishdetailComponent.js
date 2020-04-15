@@ -11,11 +11,11 @@ const formatter = new Intl.DateTimeFormat("en-US", {
 function RenderDish({detailDish}) {
     return (
         <Card>
-        <CardImg top src={detailDish.image} alt={detailDish.name} />
-        <CardBody>
-        <CardTitle>{detailDish.name}</CardTitle>
-        <CardText>{detailDish.description}</CardText>
-        </CardBody>
+            <CardImg top src={detailDish.image} alt={detailDish.name} />
+            <CardBody>
+                <CardTitle>{detailDish.name}</CardTitle>
+                <CardText>{detailDish.description}</CardText>
+            </CardBody>
         </Card>   
     );
 }
