@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { Card, CardTitle, CardImg, CardImgOverlay, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Loading } from './LoadingComponent';
 
   function RenderMenuItem ({dish}) {
     console.log("dishId: " + dish.id);
@@ -20,7 +21,7 @@ import { Card, CardTitle, CardImg, CardImgOverlay, Breadcrumb, BreadcrumbItem } 
 
   const Menu = (props) => {
   
-      const menu = props.dishes.map((dish) => {
+      const menu = props.dishes.dishes.map((dish) => {
         console.log('dish.id in menu: ' + dish.id);
         return (
             <div  className="col-12 col-md-5 m-1" key={dish.id}>
@@ -28,7 +29,24 @@ import { Card, CardTitle, CardImg, CardImgOverlay, Breadcrumb, BreadcrumbItem } 
             </div>
           );
       });
-  
+
+      if (props.dishes.isLoading) {
+        return (
+          <div className="container">
+              <div class="row">
+                  <Loading />
+              </div>
+          </div>
+        );        
+      }  else if (props.dishes.errMess) {
+        return (
+            <div className="container">
+                <div class="row">
+                    <h4>{props.dishes.errMess}</h4>
+                </div>
+            </div>
+        );       
+    } else {
       return (
           <div className="container">
               <div className="row">
@@ -45,6 +63,7 @@ import { Card, CardTitle, CardImg, CardImgOverlay, Breadcrumb, BreadcrumbItem } 
               </div>
           </div>
       );
+    }
   }
 
 
