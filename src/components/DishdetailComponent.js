@@ -4,6 +4,7 @@ import { Button, Modal, ModalHeader, ModalBody, Row, Col, Label } from 'reactstr
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => (val) && (val.length >= len);
@@ -114,7 +115,7 @@ const formatter = new Intl.DateTimeFormat("de-DE", {
 function RenderDish({ detailDish }) {
     return (
         <Card>
-            <CardImg top src={detailDish.image} alt={detailDish.name} />
+            <CardImg top src={baseUrl + detailDish.image} alt={detailDish.name} />
             <CardBody>
                 <CardTitle>{detailDish.name}</CardTitle>
                 <CardText>{detailDish.description}</CardText>
