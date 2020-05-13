@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { Fade, FadeTransform, Stagger } from 'react-animation-components';
 
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => (val) && (val.length >= len);
@@ -114,13 +115,19 @@ const formatter = new Intl.DateTimeFormat("de-DE", {
 
 function RenderDish({ detailDish }) {
     return (
-        <Card>
-            <CardImg top src={baseUrl + detailDish.image} alt={detailDish.name} />
-            <CardBody>
-                <CardTitle>{detailDish.name}</CardTitle>
-                <CardText>{detailDish.description}</CardText>
-            </CardBody>
-        </Card>
+        <FadeTransform in
+        transformProps={{
+            exitTransform: 'scale(0.5) translateY(-50%)'
+        }}            
+        >        
+            <Card>
+                <CardImg top src={baseUrl + detailDish.image} alt={detailDish.name} />
+                <CardBody>
+                    <CardTitle>{detailDish.name}</CardTitle>
+                    <CardText>{detailDish.description}</CardText>
+                </CardBody>
+            </Card>
+        </FadeTransform>
     );
 }
 
@@ -129,10 +136,12 @@ function RenderComments({ dishComments, postComment, dishId }) {
 
         const myDishComments = dishComments.map((myComment) => {
             return (
-                <div id={myComment.id} className="li text-left">
-                    <p>{myComment.comment}</p>
-                    <p>-- {myComment.author}, {formatter.format(new Date(myComment.date))} </p>
-                </div>
+                <Fade in>
+                    <div id={myComment.id} className="li text-left">
+                        <p>{myComment.comment}</p>
+                        <p>-- {myComment.author}, {formatter.format(new Date(myComment.date))} </p>
+                    </div>
+                </Fade>
             );
         });
 
@@ -140,7 +149,9 @@ function RenderComments({ dishComments, postComment, dishId }) {
             <div>
                 <h4 className="text-left">Comments</h4>
                 <div className="ul text-left">
-                    {myDishComments}
+                    <Stagger in>
+                        {myDishComments}
+                    </Stagger>
                 </div>
                 <CommentForm dishId={dishId} postComment={postComment} />
             </div>
